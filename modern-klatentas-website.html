@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KlaTentas - Professional Awnings & Tents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #D90429;
+            --secondary-color: #333;
+            --light-color: #f8f9fa;
+            --dark-color: #222;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: #D90429;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--light-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .bg-light-gray {
+            background-color: #f8f9fa;
+        }
+        
+        .card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b62828;
+            border-color: #b62828;
+        }
+        
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            object-position: 50% 60%;
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        #map {
+            height: 400px;
+        }
+        
+        .awning-list {
+            margin: 30px 0;
+        }
+        
+        .awning-list li {
+            margin-bottom: 10px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .awning-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        .advertising-section .header {
+            margin-bottom: 30px;
+        }
+        
+        .advertising-section .services {
+            margin-bottom: 30px;
+        }
+        
+        .advertising-section .pictures {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .advertising-section .pictures img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                background-color: white;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .carousel-item img {
+                height: 250px;
+            }
+            
+            .advertising-section .pictures {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mobile-dropdown {
+                position: relative;
+            }
+            
+            .mobile-dropdown .dropdown-content {
+                display: none;
+            }
+            
+            .mobile-dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .mobile-dropdown-btn {
+                width: 100%;
+                text-align: left;
+                padding: 10px 15px;
+                background-color: #f8f9fa;
+                border: 1px solid #ddd;
+                position: relative;
+            }
+            
+            .mobile-dropdown-btn:after {
+                content: '\f078';
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                position: absolute;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="KlaTentas.png" alt="KlaTentas Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Apie Mus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#awnings">Tentai & Markizės</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#advertising">Reklama</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tent-rental">Palapinių nuoma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#metal-works">Metalo darbai</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#repair">
+                            Remontas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacts">Kontaktai</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold">UAB Klatentas</h1>
+                    <p class="lead">Aukštos kokybės produkcijos ir paslaugų bei konkurencingų kainų derinys</p>
+                    <a href="#contacts" class="btn btn-primary mt-3">Sužinokite daugiau</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Apie Mus</h2>
+                    <p>UAB „Klatentas“ savo veiklą pradėjo 1992 m., ir tai buvo viena pirmųjų įmonių Lietuvoje, kuri gamino ir remontavo tentus automobiliams.
+
+                        UAB „Klatentas“ gali pasiūlyti šias prekes ir paslaugas:
+                        
+                        Tentai ir jų rėmai automobiliams;
+                        Įvairūs nestandartiniai tentiniai gaminiai;
+                        Uždangalus žemės ūkiui, pramonei;
+                        Puspriekabių, sunkvežimių stogų, tentinių užuolaidų gamybą;
+                        Įvairių tipų palapines, lauko kavines;
+                        Lengvai surenkamus angarus;
+                        Markizes;
+                        Reklamos paslaugas;
+                        Tr. Priemonių kėbulų, tentinių gaminių, surenkamų palapinių, angarų, markizių ir pan. remontas;
+                        Palapinių ir angarų nuoma;
+                        Prekyba tentiniu audiniu bei tentų furnitūra.
+                        Galime Jums įrengti objektus nuo A iki Z – nuo matavimo, vizualizacijos iki gamybos bei montavimo.</p>
+                    <a href="#contacts" class="btn btn-primary mt-3">Sužinokite daugiau</a>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <br>
+                    <div class="position-relative">
+                        <img src="ApieMus.png" alt="About KlaTentas" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awnings Section -->
+    <section id="awnings" class="bg-light-gray">
+        <div class="container">
+            <h2 class="section-title">Tentai & Markizės</h2>
+            
+            <div class="awning-list text-center">
+                <p>Tentai gaminami iš aukščiausios kokybės tentinės medžiagos, kuri išlaiko savo technines savybes net esant ekstremalioms temperatūroms – nuo -30ºC iki +70ºC. Jie nėra siuvami – medžiaga sujungiama aukštos temperatūros pagalba, naudojant vulkanizacijos technologiją. Ši medžiaga yra atspari plyšimams, visiškai sandari ir neperšlampama. Galimas platus spalvų pasirinkimas. Visos vietos, kur tentas liečiasi su metaliniu rėmu, yra papildomai sustiprintos, todėl ženkliai pailgėja gaminio eksploatacijos trukmė. Mūsų automobiliniai tentai visiškai atitinka TIR standartų reikalavimus.
+
+                    Markizės puikiai tinka ne tik viešosioms erdvėms, tokioms kaip restoranai, kavinės ar barai, bet ir individualiems namams – terasoms ar balkonams. Dalis mūsų siūlomų modelių gali būti susukami, leidžiant mėgautis atviru dangumi, kai tik pageidaujate.
+                    
+                    Markizės padeda spręsti šias problemas:
+                    
+                    Apsauga nuo tiesioginių saulės spindulių, lietaus ir kitų aplinkos veiksnių – tiek terasoms, tiek langams, durims ar vitrinoms.
+                    
+                    Estetinis eksterjero atnaujinimas – markizės ne tik puošia fasadą, bet ir tampa puikia vieta reklamai.
+                    
+                    Siūlome šių tipų markizes:
+                    
+                    Terasinės – išsukamos rankiniu būdu arba elektriniu varikliu, skirtos tiek langų, tiek didesnių atvirų erdvių, tokių kaip terasos ar aikštelės, uždengimui.
+                    
+                    Balkoninės – skirtos montuoti virš langų, durų ar vitrinų, reguliuojamos aukštyn ir žemyn.
+                    
+                    Klasikinės – tvirtos, iš aliuminio profilių, neatsilenkia, montuojamos virš įėjimų ar langų.
+                    
+                    Stogeliai – tvirti, su profiliuoto metalo konstrukcija, naudojami virš langų, durų ar vitrinų kaip stacionari apsauga.</p>
+
+                    <br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="text-start">
+                            <li>Žemės ūkiui;</li>
+                            <li>Puspriekabėms, sunkvežimiams, savivarčiams pan.;</li>
+                            <li>Angarams;</li>
+                            <li>Pastogėms;</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="text-start">
+                            <li>Terasoms;</li>
+                            <li>Pavėsinėms;</li>
+                            <li>Įvairiems laivams;</li>
+                            <li>Garažų vartams;</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="text-start">
+                            <li>Įvairioms pertvaroms;</li>
+                            <li>Pramogoms;</li>
+                            <li>Maišus įvairiems daiktams įdėti, uždengti;</li>
+                            <li>Palapinėms.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Awnings Carousel -->
+            <div id="awningsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#awningsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#awningsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#awningsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+                    <button type="button" data-bs-target="#awningsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <!-- More indicators for the 50+ images -->
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="Markezes - Main Pic (Awning).PNG" class="d-block w-100" alt="Awning 1">
+                        <!-- <div class="carousel-caption d-none d-md-block">
+                            <h5>Retractable Awnings</h5>
+                            <p>Perfect for patios and outdoor spaces</p>
+                        </div> -->
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Markezes - Mini 2 Pic (Awning).jpg" class="d-block w-100" alt="Awning 2">
+                        <!-- <div class="carousel-caption d-none d-md-block">
+                            <h5>Commercial Awnings</h5>
+                            <p>Enhance your business storefront</p>
+                        </div> -->
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Tentai - Main Pic (Rory) 1.jpg" class="d-block w-100" alt="Awning 3">
+                        <!-- <div class="carousel-caption d-none d-md-block">
+                            <h5>Custom Designs</h5>
+                            <p>Tailored to your specific needs</p>
+                        </div> -->
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Tentai - Mini 5 Pic (Awning).jpg" class="d-block w-100" alt="Awning 4">
+                        <!-- <div class="carousel-caption d-none d-md-block">
+                            <h5>Custom Designs</h5>
+                            <p>Tailored to your specific needs</p>
+                        </div> -->
+                    </div>
+                    <!-- More carousel items for the 50+ images -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#awningsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#awningsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#contacts" class="btn btn-primary">Užklausa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advertising Section -->
+    <section id="advertising" class="advertising-section">
+        <div class="container">
+            <h2 class="section-title">Reklama</h2>
+            
+            <!-- Header Part -->
+            <div class="header">
+                <p>Mūsų įmonė uždeda reklamą ant krovininio autotransporto kėbulų, įvairių tentų (palapinių, stogų, uždangalų ir pan.). Reklama dedama dvejais būdais: ant tentinių gaminių reklama yra dažoma specialiais, ilgaamžiais, tentams skirtais dažais, kurie nebijo laužymo ir yra atsparūs gamtiniams poveikiams; ant kietų paviršių (vilkikų, kėbulų ir pan.) reklama klijuojama lipnia, lauko sąlygoms skirta plėvele.
+
+                    Taip pat galime pasiūlyti reklaminių tentų (spausdintos reklamos ant tento) maketavimą bei gamybą.</p>
+            </div>
+            
+           
+
+
+
+
+
+
+
+
+            
+            <!-- Pictures Part -->
+            <div class="pictures">
+                <img src="ReklamaMiniPic.jpg" alt="Advertising Example 1">
+
+                <img src="ReklamaMini2Pic.jpg" alt="Advertising Example 2">
+
+                <img src="ReklamaMini3Pic.jpg" alt="Advertising Example 3">
+
+                <img src="ReklamaMini4Pic.jpg" alt="Advertising Example 4">
+
+                <img src="ReklamaMini5Pic.jpg" alt="Advertising Example 5">
+
+                <img src="ReklamaMini6Pic.jpg" alt="Advertising Example 6">
+
+                <img src="ReklamaMini7Pic.jpg" alt="Advertising Example 1">
+
+                <img src="ReklamaMini8Pic.jpg" alt="Advertising Example 2">
+
+                <img src="ReklamaMini9Pic.jpg" alt="Advertising Example 3">
+
+                <img src="ReklamaMini10Pic.jpg" alt="Advertising Example 4">
+
+                <img src="ReklamaMini11Pic.jpg" alt="Advertising Example 5">
+
+                <img src="ReklamaMini12Pic.jpg" alt="Advertising Example 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tent Rental Section -->
+    <section id="tent-rental" class="bg-light-gray">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Palapinių nuoma</h2>
+                    <p>Jei Jums nėra ekonomiškai naudinga gamintis palapinę arba jos reikia tik trumpam laikui (šventei, renginiui ir pan.) UAB „Klatentas“ gali pasiūlyti palapinių nuomą. Palapinę galima išsinuomoti nuo 1 dienos iki viso sezono. Siūlome platų asortimentą nuomojamų palapinių, kurios skiriasi savo forma ir dydžiu. Palapinės yra nuo 25m² iki 360m².</h5>
+                    
+
+
+
+
+
+                    <a href="#contacts" class="btn btn-primary mt-3">Užsisakyti dabar</a>
+                </div>
+                <div class="col-lg-6">
+                    <!-- For mobile view -->
+                    <div class="d-block d-md-none mobile-dropdown">
+                        <button class="mobile-dropdown-btn">View Tent Images</button>
+                        <div class="dropdown-content mt-3">
+                            <img src="PalapiniųNuomaMini1Pic.jpg" alt="Tent Rental" class="img-fluid rounded shadow mb-3">
+                        </div>
+                    </div>
+                    <!-- For desktop view -->
+                    <div class="d-none d-md-block">
+                        <img src="PalapiniųNuomaMini1Pic.jpg" alt="Tent Rental" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metal Works Section -->
+    <section id="metal-works">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+
+                    <!-- For desktop view -->
+                    <div class="d-none d-md-block">
+                        <img src="MetaloDarbaiMini7Pic.jpg" alt="Metal Works" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Metalo darbai</h2>
+                    <p>Jums galime pasiūlyti:</p>
+                    <!-- <h5 class="mt-4">Our Metal Works Services:</h5> -->
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <ul class="awning-list">
+                                <li>Juodojo metalo virinimą;</li>
+                                <li>Juodojo metalo bei aliuminio konstrukcijų gamybą;</li>
+                                <li>Sunkvežimių kėbulų tiesinimą, remontą;</li>
+                                <li>Tentinių palapinių konstrukcijų gamybą;</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="awning-list">
+                                <li>Sunkvežimių konstrukcijų, skirtų uždėti tentui, gamybą;</li>
+                                <li>Sunkvežimių grindų remontą, varžymą, grindinių lapų keitimą;</li>
+                                <li>Sunkvežimių tentinių užuolaidų bėgelių, įtempėjų ir kt. remontą bei keitimą;</li>
+                                <li>Įvairius nestandartinius, metalinius, gaminius.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#contacts" class="btn btn-primary mt-3">Gauti pasiūlymą</a>
+                </div>
+
+                <!-- For mobile view -->
+                <div class="d-block d-md-none mobile-dropdown mb-4">
+                    <br>
+                        <button class="mobile-dropdown-btn">View Metal Works Images</button>
+                    <div class="dropdown-content mt-3">
+                        <img src="MetaloDarbaiMini7Pic.jpg" alt="Metal Works" class="img-fluid rounded shadow mb-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair Section -->
+    <section id="repair" class="bg-light-gray">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Remontas</h2>
+                    <p>UAB „Klatentas“ remontuoja tentus, jų rėmus, bortus, kėbulus, palapines. Mes turime patirties vykdant įvairius remonto darbus: </p>
+                    <h5 class="mt-4">We Repair:</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <ul class="awning-list">
+                                <li> sunkvežimių kėbulų remontas;</li>
+                                <li>metalinio rėmo</li>
+                                <li>aliuminio bortų</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="awning-list">
+                                <li>durų remontas;</li>
+                                <li>krovininio autotransporto grindų remontas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#contacts" class="btn btn-primary mt-3">Suplanuoti remontą</a>
+                </div>
+                <div class="col-lg-6">
+                    <!-- For mobile view -->
+                    <div class="d-block d-md-none mobile-dropdown">
+                        <br>
+                        <button class="mobile-dropdown-btn">View Repair Images</button>
+                        <div class="dropdown-content mt-3">
+                            <img src="RemontasMini1Pic.jpg" alt="Repair Services" class="img-fluid rounded shadow mb-3">
+                        </div>
+                    </div>
+                    <!-- For desktop view -->
+                    <div class="d-none d-md-block">
+                        <img src="RemontasMini1Pic.jpg" alt="Repair Services" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacts">
+        <div class="container">
+            <h2 class="section-title">Susisiekite su Mumis</h2>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Jūsų Vardas">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Jūsų El. Paštas">
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="Jūsų Telefono Numeris">
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select">
+                                <option selected>Pasirinkite Paslaugą</option>
+                                <option value="awnings">Tentai Markizės</option>
+                                <option value="advertising">Reklama</option>
+                                <option value="tent-rental">Palapinių nuoma</option>
+                                <option value="metal-works">Metalo darbai</option>
+                                <option value="repair">Remontas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Jūsų žinutė"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Siųsti žinutę</button>
+                    </form>
+                    <br>
+                </div>
+                
+                <div class="col-md-6">
+                    <div id="map" class="mb-4">
+                        <!-- Google Map will be loaded here -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2249.4203006931734!2d21.18714217678556!3d55.68168017305792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e4dc4ecef0ce39%3A0x2cfb153411c1516d!2sSvajon%C4%97s%20g.%2031a%2C%20Klaip%C4%97da%2C%2094101%20Klaip%C4%97dos%20m.%20sav.!5e0!3m2!1sen!2slt!4v1745667812428!5m2!1sen!2slt" width="550" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>KlaTentas</h5>
+                    <p>Profesionalūs markizių, tentų ir metalinių konstrukcijų sprendimai Klaipėdoje.</p>
+                    <div class="contact-info">
+                        <h5>Kontaktinė Informacija</h5>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Svajones St. 31A, Klaipėda, Lithuania</p>
+                        <p><i class="fas fa-phone me-2"></i> +370 46 34 75 49</p>
+                        <p><i class="fas fa-phone me-2"></i>+370 685 61 677</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@klatentas.lt</p>
+                        <p><i class="fas fa-clock me-2"></i> Pirm-Penkt: 8:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Greitas Nuoroda</h5>
+                    <ul class="footer-links list-unstyled">
+                        
+                        <li><a href="#about">Apie Mus</a></li>
+                        <li><a href="#awnings">Tentai Markizės</a></li>
+                        <li><a href="#advertising">Reklama</a></li>
+                        <li><a href="#tent-rental">Palapinių nuoma</a></li>
+                        <li><a href="#metal-works">Metalo darbai</a></li>
+                        <li><a href="#repair">Remontas</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Naujienlaiškis</h5>
+                    <p>Prenumeruokite, kad gautumėte naujienas apie mūsų paslaugas ir akcijas.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <button class="btn btn-primary" type="button">Prenumeruoti</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="text-center">
+                <!-- <p>&copy; 2025 KlaTentas. Visos teisės saugomos.</p>
+                <br> -->
+                <p>&copy; Sukūrė Future Frame: fframe2025@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        
+        // Mobile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+            
+            dropdownBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+                    
+                    if (dropdown.classList.contains('active')) {
+                        this.innerText = 'Hide Images';
+                    } else {
+                        this.innerText = 'View Images';
+                    }
+                });
+            });
+            
+            // Navbar scroll behavior
+            const navbar = document.querySelector('.navbar');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow');
+                } else {
+                    navbar.classList.remove('shadow');
+                }
+            });
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>
